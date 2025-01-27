@@ -4,9 +4,19 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean test'
+                script {
+                    // Выполнение сборки Maven
+                    sh 'mvn clean install'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    // Запуск тестов Maven
+                    sh 'mvn test'
+                }
             }
         }
     }
 }
-
