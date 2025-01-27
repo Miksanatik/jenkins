@@ -11,4 +11,10 @@ public class TestClass {
     public void test(){
         assertTrue(true);
     }
+
+    @Test
+    @DisplayName("Simple negative test")
+    public void ntest(){
+        assertTrue(false);
+    }
 }
