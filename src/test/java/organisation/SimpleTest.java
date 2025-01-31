@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestClass {
+public class SimpleTest {
     @Test
     @DisplayName("Simple test")
     public void test(){
