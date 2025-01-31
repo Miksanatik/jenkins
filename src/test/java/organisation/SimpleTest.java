@@ -11,6 +11,21 @@ public class SimpleTest {
     public void test(){
         assertTrue(true);
     }
+    @Test
+    @DisplayName("Simple test 2")
+    public void test2(){
+        assertTrue(true);
+    }
+    @Test
+    @DisplayName("Simple test 3")
+    public void test3(){
+        assertTrue(true);
+    }
+    @Test
+    @DisplayName("Simple test")
+    public void test4(){
+        assertTrue(true);
+    }
 
     @Test
     @DisplayName("Simple negative test")
