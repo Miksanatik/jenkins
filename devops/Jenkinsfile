@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Выполнение сборки Maven
-                    sh 'mvn clean install'
+                    sh 'mvn clean'
                 }
             }
         }
