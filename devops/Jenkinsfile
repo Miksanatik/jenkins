@@ -2,11 +2,15 @@ pipeline {
     agent any
 
     environment {
-        ALLURE_REPORTS = "target/allure-results"
+        ALLURE_RESULTS = "target/allure-results"
+    }
+
+    parameters {
+        booleanParam(name: 'GENERATE_ALLURE', defaultValue: true, description: 'Generate Allure Report')
     }
 
     stages {
-         stage('Run Tests') {
+        stage('Run Tests') {
             steps {
                 sh 'mvn clean test'
             }
@@ -32,10 +36,10 @@ pipeline {
     }
 
     post {
-        always {
-            emailext subject: "Test Execution Report",
-                     body: "Allure report available at ${BUILD_URL}/allure/",
-                     recipientProviders: [developers()]
+        success {
+            script {
+                echo "Allure report is available at: ${BUILD_URL}allure/"
+            }
         }
     }
 }
