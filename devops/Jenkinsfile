@@ -1,22 +1,38 @@
 pipeline {
     agent any
 
+    environment {
+        ALLURE_REPORTS = "target/allure-results"
+    }
+
     stages {
-        stage('Build') {
+         stage('Run Tests') {
             steps {
-                script {
-                    // Выполнение сборки Maven
-                    sh 'mvn clean'
+                sh 'mvn clean test'
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'target/allure-results/**', fingerprint: true
                 }
             }
         }
-        stage('Test') {
+
+        stage('Generate Allure Report') {
             steps {
                 script {
-                    // Запуск тестов Maven
-                    sh 'mvn test'
+                    allure([
+                        results: [[path: "target/allure-results"]]
+                    ])
                 }
             }
+        }
+    }
+
+    post {
+        always {
+            emailext subject: "Test Execution Report",
+                     body: "Allure report available at ${BUILD_URL}/allure/",
+                     recipientProviders: [developers()]
         }
     }
 }
