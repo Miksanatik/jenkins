@@ -18,6 +18,9 @@ pipeline {
         }
 
         stage('Generate Allure Report') {
+            when {
+                expression { return params.GENERATE_ALLURE == true }
+            }
             steps {
                 script {
                     allure([
